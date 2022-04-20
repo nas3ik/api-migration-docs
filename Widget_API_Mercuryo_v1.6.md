@@ -46,9 +46,9 @@ Widget is the most convenient way to integrate with Mercuryo.
 
 #### 1. How to start
 
-#### 1.1. Get parameters
+#### 1.1. Set parameters
 
-For redirection to Mercuryo platform use  [**redirect**](https://widget.mercuryo.io/docs.html). In this case partners get commissions
+To enter the Mercuryo platform, use [**redirect**](https://widget.mercuryo.io/docs.html). In this case, the partners receive a commission fee
 
 [Example of filled parameters](https://github.com/mercuryoio/api-migration-docs/blob/master/imgwidget.png)
 
@@ -62,7 +62,7 @@ For redirection to Mercuryo platform use  [**redirect**](https://widget.mercuryo
 
 | Section  | Description  | 
 | ------------- | -------------  |
-| Dashboard | page with transaction information, also you can add widget by tapping on the <Add widget> button |
+| Dashboard | page with transaction information, where you can also add widget by tapping on the <Add widget> button |
 | Profile | you can set up your commission and change password |	
 | My widgets | list of widgets |
 | Widget callbacks | list of callbacks; you can send test callback from this page |
@@ -75,16 +75,16 @@ For redirection to Mercuryo platform use  [**redirect**](https://widget.mercuryo
 
 | Section  | Description  | 
 | ------------- | -------------  |
-| Name | your widget name |
-| Domain |   `https://domain.io` 
+| Name | name of your widget |
+| Domain | `https://domain.io` 
  **Note:** Note: Please make sure there are no symbols or backspace after `https://domain.io` The widget will not work properly and you’ll see `widget.mercuryo.io refused to connect` message.|
 | Alias | transfer your widget id to your widget alias |
-| Backward URL | merchant URL where the users will return to from Redirect |
-| Callback URL | merchant server URL which listens to callbacks automatically when Mercuryo updates transaction status | 
-| Sign Key | Callbacks signature check |
+| Backward URL | URL of the merchant where the users will return to from Redirect |
+| Callback URL | URL of the merchant which processes callbacks automatically when Mercuryo updates transaction status | 
+| Sign Key | callbacks signature check |
 | Check signature  checkbox | enable or disable signature verification |
-| Secret Key | your secret key for your signature verification |
-| Is Active checkbox | it shows your is widget  active or not |
+| Secret Key | secret key for your signature verification |
+| Is Active checkbox | it shows if your widget is active or not |
 
 	
 #### 1.4 Widget general questions
@@ -98,11 +98,11 @@ For redirection to Mercuryo platform use  [**redirect**](https://widget.mercuryo
 
 ### 2. Webhooks	
 
-These webhooks allow you to get current transaction status and include all the data.
+These webhooks allow you to get current transaction status including all the data.
 
-1.  Set up automatic webhooks to your server in a dashboard (`Callback URL`).  This is obligatory.
-2.  Before creating an order you should create a unique ID (max size 255 characters).
-3.  Set the generated ID into the `merchantTransactionId` parameter (in let `widgetParams`) or in the URL parameter `merchant_transaction_id`.
+1. Set up automatic webhooks to your server in a dashboard (`Callback URL`). This is obligatory.
+2. Before creating an order you should create a unique ID (max size 255 characters).
+3. Set the generated ID into the `merchantTransactionId` parameter (in let `widgetParams`) or in the URL parameter `merchant_transaction_id`.
 
 `widget_id` &ndash; partners widget ID
 
@@ -187,7 +187,7 @@ When the User wants to sell crypto he needs to choose what to do if the crypto r
 1. `payout`
 2. `refund`
 	
-When he has made his choice and get the blockchain address this callback is called
+When User makes his\her choice and receives the address of the blockchain, a callback is invoked
 	
 Parameters:
 
@@ -206,9 +206,9 @@ If you want to check the processing of the webhook, you can send a test callback
 Follow this steps:
 
 1. Go to **Widget Callbacks**
-2. Select the type of transaction on the **Transaction Type** field
-3. Select the status of the transaction on the **Transaction Status** field
-4. Select your widget on the **Widget Id** field
+2. Select the type of transaction in the **Transaction Type** field
+3. Select the status of the transaction in the **Transaction Status** field
+4. Select your widget in the **Widget Id** field
 5. Click on the **Send test callback** button
 
 ![testcallbackimg](https://github.com/mercuryoio/api-migration-docs/blob/master/testcallbackimg.png)
@@ -231,7 +231,7 @@ There are two internal operations "buy" and "withdraw" per 1 transaction
 | `cancelled` | transaction cancelled (usually due to timeout of descriptor or 3ds) |
 | `paid` | transaction completed successfully (money debited from the card) |
 | `order_failed` | transaction was rejected by the issuer bank |
-| `descriptor_failed` | the user entered an invalid descriptor three times |
+| `descriptor_failed` | user entered an invalid descriptor three times |
 
 **Type: `withdraw`**
 
@@ -240,7 +240,7 @@ There are two internal operations "buy" and "withdraw" per 1 transaction
 | `new` | transaction initiated |
 | `pending` | transaction in progress |
 | `failed` | completed unsuccessfully (this is rare) |
-| `order_scheduled` | the transaction is successful, the money is held off/frozen on the card by the bank, Mercuryo is waiting for the client to pass KYC. As soon as the client passes KYC crypto will be sent to the address, if the client fails KYC transaction will be canceled within 1 hour abd client’s bank will return money to the card.|
+| `order_scheduled` | transaction is successful, money is held off/frozen on the card by the bank, Mercuryo is waiting for the client to pass KYC. As soon as the client passes KYC, crypto will be sent to the address. If the client fails KYC transaction will be canceled within 1 hour and client’s bank will return money to the card.|
 | `completed` | successfully completed (received transaction hash) |
 
 #### 3.2. SELL
@@ -343,8 +343,8 @@ Request:
 | Parameter | Description  | 
 | ------------- | -------------  |
 | `widget_id` | your widget id |
-| `date start` | date of the start of the period which you want get the status |
-| `date end` | date of the end of the period which you want get the status |
+| `date start` | the start date of the period you want to get the status of |
+| `date end` | the end date of the period you want to get the status of |
 | `merchant_transaction_id` | current merchant transaction id |
 	
 **By widget id**
@@ -355,8 +355,8 @@ Request:
 | Parameter | Description  | 
 | ------------- | -------------  |
 | `widget_id` | your widget id |
-| `date start` | date of the start of the period which you want get the status |
-| `date end` | date of the end of the period which you want get the status |
+| `date start` | the start date of the period you want to get the status of |
+| `date end` | the end date of the period you want to get the status of |
 
 Response example:
 
@@ -805,7 +805,7 @@ Signature is calculated using the following algorithm:
 
 signature = sha512(address+secret), without space between `address` and `secret`. Sign key isn't required.
 	
-The Validation is on the step `Pay with card`. If the signature is invalid, the widget is displayed, but the User cannot complete the operation. In this case the error `Signature is invalid` will be shown to the User.
+The Validation is activated on the step `Pay with card`. If the signature is invalid, the widget is displayed, but the User cannot complete the operation. In this case the error `Signature is invalid` will be shown to the User.
 
 For signature generation you can use [this](https://www.freeformatter.com/)
 
@@ -817,7 +817,6 @@ Cryptography & Security -> SHA-512 Generator -> Fill the **Copy-paste the string
 	
 `https://sandbox-exchange.mrcr.io/?widget_id=your_widget_id&address=blockchain_adress&signature=user_generated_signature`
 
-*There are no autofilled parameters `address`, `address_map` and `hide_address` for Mercuryos own widget.*
 ***
 ***
 
@@ -928,8 +927,8 @@ test erc-20 address &ndash; `0xA14691F9f1F851bd0c20115Ec10B25FC174371DF`
 
 | Error code  | Description  | 
 | ------------- | -------------  |
-| 2xx | all is okay. The request was successfully received, understood, and accepted |
-| 4xx | most of them are a part of our normal flow, so all of those codes are coming from the backend and processed normally by our frontend. Don’t care much if you see any of those in your logs, as they don’t indicate any serious problem related with service |
+| 2xx | everything is okay. The request was successfully received, understood, and accepted |
+| 4xx | most of them are part of our normal flow, so all of those codes are coming from the backend and processed normally by our frontend. Don’t care much if you see any of those in your logs, as they don’t indicate any serious problem related with service |
 | 5xx | server errors. Mercuryo team has already seen them on monitor and is already chasing the problem. This is normally resolved as quickly as possible, because it might affect all Mercuryo partners. So if you see that error was detected 3 days ago or even half day ago — 100% it’s fixed |
 
 **Most common cases of 4xx**
@@ -954,17 +953,17 @@ Share Token allows Mercuryo to check partner databases for user identity and use
 #### 9.1. Silent Login
 
 Silent login is a tool that makes login in Mercuryo easier for your users. 
-Contact Your account manager to agree on what user data is allowed to silent sign-up for your users. 
+Contact Your account manager to agree on what user data is allowed to silent sign in for your users. 
 
 
 #### 9.2. Acceptance: 
 
 1. You need to add to your Terms and Policy an agreement of sharing data with Mercuryo.
-2. You need to make an agreement with Mercuryo aabout Mercuryo using data for registration and third parties.
-3. You need to ask users to accept Mercurio term in your interface by publishing them on Your site.
+2. You need to make an agreement with Mercuryo about Mercuryo using data for registration and third parties.
+3. You need to ask users to accept Mercuryo terms in your interface by publishing them on Your site.
 
 #### 9.3. API methods
-There is two API methods: one for users that already have mercuryo account and one for new ones.
+There is two API methods: one for users that already have Mercuryo account and one for new ones.
 
 ##### 9.3.1. **Silent Login**
 
@@ -972,7 +971,7 @@ For users already registered in Mercuryo use:
 
 Request: `POST https://api.mercuryo.io/v1.6/sdk-partner/login`
 
-Note: Please use one and only one of available params
+Note: Please use one and only one of available parameters
 
 | Header  | Type  |  
 | ------------- | -------------  |
@@ -980,7 +979,7 @@ Note: Please use one and only one of available params
 | **Parameter**  | **Description**  | 
 | ------------- | -------------  |
 | `phone` | users phone number |
-| `uuid` | id you got after using sign-up |
+| `uuid` | id you got after using sign in |
 | `email` | users email |
 
 Responses:
@@ -1052,7 +1051,7 @@ Response example:
 
 #### 9.5. How to
 
-You need follow this steps:
+You need to follow this steps:
 1. Get `init_token` and `init_type_token` by using API Methods
 2. Redirect user to `https://your_widget_url/?init_token=users_init_token&init_type_token=users_init_type_token`. The User needs to verify his phone\email by code that he will get on his phone\e-mail. The verification page is made on Mercuryo side
 
